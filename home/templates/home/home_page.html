@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags wagtailcore_tags %}
+{% load static %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+{% block content %}
+<!-- TODO: finish making sure that all the content is loaded here-->
+<!-- The Hero Section -->
+<section class="Hero">
+    <div id="carouselExampleCaptions" class="carousel slide">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                {% image page.hero_image original class="d-block w-100 carousel-image" %}
+                <div class="carousel-caption d-flex flex-column justify-content-center text-start h-100"> 
+                    <div class="text-start">
+                        <h2 class="fs-1 fw-bold">{{ page.hero_image_title }}</h2>
+                        <div class="container p-0 m-0"><div class="row"><div class="col-md-5"><div class="fs-3">{{ page.hero_image_text|richtext }}</div></div></div></div>
+                        <a href="{{ page.hero_cta_link }}"><button class="btn btn-primary fs-4 py-1 px-4 rounded-pill shadow">{{ page.hero_cta }}</button></a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                {% image page.hero_image_1 original class="d-block w-100 carousel-image" %}
+                <div class="carousel-caption d-flex flex-column justify-content-center text-start h-100">
+                    <div class="text-start">
+                        <h2 class="fs-1 fw-bold">{{ page.hero_image_title_1 }}</h2>
+                        <div class="container p-0 m-0"><div class="row"><div class="col-md-5"><div class="fs-3 ">{{ page.hero_image_text_1|richtext }}</div></div></div></div>
+                        <a href="{{ page.hero_cta_link }}"><button class="btn btn-primary fs-4 py-1 px-4 rounded-pill shadow">{{ page.hero_cta }}</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+<!-- end of The Hero Section -->
+<!-- Promo Section -->
+<section >
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-6 d-flex flex-column justify-content-center">{% image page.promo_image original class="d-block w-100 object-fit-cover rounded-4 h-75 carousel-image" %}</div>
+            <div class="col-md-6 d-flex flex-column justify-content-center"><div class="col-12 text-align-center"><h2 class="display-1 secondary-color">{{page.promo_title}}</h2></div>{{ page.promo_text|richtext}}</div>
+        </div>
+    </div>
+</section>
+<!--end of  Promo Section -->
+<!-- vision and goals section -->
+<section class="bg-body-tertiary">
+    <div class="container">
+        <!-- This change it should instead be a flowing thing with goals mission and everything in it's own row
+        This way i can add images to the goals and make it slightly better-->
+        <div class="row">
+            <div class="col-md-4 text-center p-4">
+                <h3 class="my-5 display-1 secondary-color">{{ page.vision_title }}</h3>
+                <div class="text-start mb-5">{{page.vision_text|richtext}}</div>
+            </div>
+            <div class="col-md-4 text-center p-4">
+                <h3 class="my-5 display-1 secondary-color">{{page.mission_title}}</h3>
+                <div class="text-start mb-5">{{page.mission_text|richtext}}</div>
+            </div>
+            <div class="col-md-4 text-center p-4 ">
+                <h3 class="my-5 display-1 secondary-color">{{page.goal_title}}</h3>
+                <div class="text-start mb-5">{{page.goal_text|richtext}}</div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- endo of vision  and goals section-->
+<!-- featured Sections-->
+<!-- featured section 1-->
+<section class="my-5">
+    <div class="container">
+        <div class="row">
+            {% if page.featured_section_1 %}
+                <div class="col-12 text-center mb-2"><h2 class="display-1 secondary-color">{{ page.featured_section_1_title}}</h2></div>
+                {% for post in page.featured_section_1.specific.get_children|slice:"3" %}
+                    <div class="col-md-4 p-4">
+                        <div class="card border-0 rounded-bottom-4 shadow h-100">
+                            {% image post.specific.image original class="d-block w-100 object-fit-cover" %}
+                            <div class="card-body bg-body-secondary">
+                                <h3 class="h3 fw-light">{{post.title}}</h3>
+                                <p class="lead">{{post.specific.introduction}}</p>
+                                <a class=" fw-semibold text-primary-emphasis link-underline link-underline-opacity-0" href="{% pageurl post %}">Read More</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- end of featured section 1-->
+<!-- featured section 2-->
+<section class="bg-body-tertiary bg-opacity-50 mt-5">
+    <div class="container"><div class="row">
+        {% if page.featured_section_2 %}
+            <div class="col-12 text-center mb-2"><h2 class="display-1 secondary-color">{{page.featured_section_2_title}}</h2></div>
+            <div class="col-md-4 d-flex flex-column justify-content-center">
+                <h2 class="fw-bold fs-1 my-2">{{page.featured_section_2.title}}</h2>
+                <p class="lead">{{page.featured_section_2.specific.introduction|richtext}}</p>
+                <a class=" fw-semibold text-primary-emphasis link-underline link-underline-opacity-0" href="{% pageurl page.featured_section_2 %}">See More</a>
+            </div>
+            <div class="col-md-8 mb-5">
+                <div class="container"><div class="row">
+                    {% for post in page.featured_section_2.specific.get_children|slice:"2" %}
+                    <div class="col-md-6 rounded-4 my-2">
+                        <div class="card shadow my-2 h-100">
+                            {% image post.specific.image fill-250x250 class="d-block w-100 object-fit-cover card-img-top" %}
+                            <div class="card-body bg-dark bg-opacity-10">
+                                 <h3 class="card-title">{{post.title}}</h3>
+                                 <p class="card-text">{{ post.specific.introduction }}</p>
+                                 <a class=" fw-semibold text-primary-emphasis link-underline link-underline-opacity-0" href="{% pageurl post %}">Read More</a>
+                            </div>
+                        </div>   
+                    </div>                
+                    {% endfor %}
+                </div></div>
+
+            </div>
+
+        {% endif %}
+    </div></div>
+</section>
+<!-- end of featured section 2-->
+<!-- featured section 3 -->
+<section>
+    <div class="container">
+        <div class="row">
+        {% if page.featured_section_3 %}
+            <div class="col-12"><h2>{{page.featured_section_3_title}}</h2></div>
+            {% for post in page.featured_section_3.specific.get_children|slice:"3" %}
+                    {% image post.specific.image fill-500x500 class="d-block w-100 object-fit-cover" %} 
+                    <div class="col-md-4"><h3>{{post.title}}</h3>
+                    <p>{{ post.specific.introduction }}</p>
+                    <a href="{% pageurl post %}">Read More</a>
+                </div>                
+            {% endfor %}
+        {% endif %}
+            </div>
+    </div>
+</section>
+<!-- end of featured section 3 -->
+<!-- end of featured Sections-->
+<!-- Our Partners section -->
+<section>
+    <div class="container">
+        <div class="row d-flex flex-wrap align-content-start">
+            {% if page.partners  %}
+               {% for block in page.partners %}
+                    {% if block.block_type == 'Partner_infor' %}
+                        <a class="mx-3" href="{{block.value.partner_URL}}">{% image block.value.partner_logo fill-500x500 %}</a>
+                    {% endif %}
+               {% endfor %}
+               
+            {% endif %}
+        </div>
+    </div>
+</section>
+<!-- end of Our Partners section -->
+
+
+{% endblock content %}

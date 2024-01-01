@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %} {{page.title}} {% endblock %}
+
+    {% block content %}
+    <div class="massive-margin"></div>
+        <div class="container">
+            <div class="row">
+                
+                <div class="d-flex justify-content-center">
+                    
+                    <div class="container col-md-8">
+                        <div class="row">
+                            
+                            <div class="col-12">
+                                <h1 class="fw-bold fs-1 text-align-center mx-auto">{{page.title}}</h1>
+                                <div class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            {% image page.image original class="d-block w-100 h-50  carousel-image" %}
+                                        </div>
+                                    </div>
+                                </div>
+                                {% for block in page.body %}
+                                    {% if block.block_type == 'heading' %}
+                                        <h3 class="fs-3">{{block.value}}</h3>
+                                    {% endif %}
+
+                                    {% if block.block_type == 'paragraph' %}
+                                        {{block.value|richtext}}
+                                    {% endif %}
+
+                                    {% if block.block_type == 'image' %}
+                                        <div class="container">
+                                            <div class="row">
+                                                <div class="col-12 mb-4">
+                                                    {% image block.value original class="d-block object-fit-cover w-100 h-100 rounded-1" %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+
+                                    {% if block.block_type == 'URL' %}
+                                    <a href="{{block.value}}" target="_blank">{{block.value}}</a>
+                                    {% endif %}
+
+                                    {% if block.block_type == 'blockquote' %}
+                                        <blockquote class="lead">
+                                            {{block.value}}
+                                        </blockquote>
+                                    {% endif %}
+
+                                    {% if block.block_type == 'embedlink' %}
+
+                                        {{ block.value}}
+
+                                    {% endif %}
+
+                                {% endfor %}
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+    {% endblock %}    
+

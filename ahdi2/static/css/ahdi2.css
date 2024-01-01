@@ -1,0 +1,28 @@
+.carousel-image {
+    max-height: 100vh;
+    object-fit: cover;   
+}
+
+.navbar {
+    backdrop-filter: blur(3px);
+}
+
+.massive-margin {
+    margin-top: 200px;
+}
+.btn-primary {
+    background-color: #341e73!important;
+    border-color: #5631bf!important;
+}
+.btn-primary:hover {
+    border-color: #5631bf!important;
+    background-color: #1c1040!important;
+}
+
+.primary-color {
+    color: #8f6cef;
+}
+
+.secondary-color {
+    color:#f3382a;
+}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %} {{page.title}} {% endblock %}
+
+    {% block content %}
+    <div class="massive-margin">
+    <div class="container">
+        <div class="row">
+            <div class="d-flex justify-content-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12 d-flex justify-content-center mb-3"><h2 class="display-1">{{page.title}}</h2></div>
+                        {% for photo in page.photo.all %}
+                        <div class="col-md-6 mb-5">
+                                {% image photo.image original class="d-block object-fit-cover w-100 h-100 rounded-4 shadow-lg" %}
+                               
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+    {% endblock %}
+

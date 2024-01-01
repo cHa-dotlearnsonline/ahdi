@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %} {{page.title}} {% endblock %}
+
+    {% block content %}
+        <div class="massive-margin">
+            {% for post in galleries %}
+                {% with gallery=post.specific %}
+                    <div style="border: 5px; width: 200px;">
+                        <a href="{% pageurl gallery %}">
+                            <h1>{{gallery.title}}</h1>
+                            <p>{{gallery.introduction}}</p>
+                            {% image gallery.banner fill-100x100 %}
+                        </a>
+                    </div>
+                {% endwith %}
+            {% endfor %}
+        </div>        
+
+
+{% endblock %}
+

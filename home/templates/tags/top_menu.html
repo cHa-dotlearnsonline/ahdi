@@ -1,0 +1,8 @@
+{% load navigation_tags wagtailcore_tags %}
+{% get_site_root as site_root %}
+
+{% for menuitem in menuitems %}
+<li class="nav-item m-md-4">
+    <a class="navlink link-offset-2 link-underline link-underline-opacity-0" style="font-size: 18px;" href="{% pageurl menuitem %}"><span class="primary-color">{{ menuitem.title }}</span></a>
+</li>
+{% endfor %}

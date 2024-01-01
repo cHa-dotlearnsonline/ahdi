@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block body_class %} {{page.title}} {% endblock %}
+
+    {% block content %}
+    
+    <div class="massive-margin">
+        <div class="container">
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <div class="container">
+                        <div class="row">
+                            {% for post in stories %}
+                            <div class="col-md-4 mb-3">
+                                {% with story=post.specific %}
+                                    <div class="card shadow my-2 h-100 ">
+                                        {% image story.image original class="d-block w-100 h-50 object-fit-cover card-img-top" %}
+                                        <div class="card-body bg-dark bg-opacity-10">
+                                            <h3 class="card-title">{{story.title}}</h3>
+                                            <p class="card-text">{{story.introduction}}</p>
+                                            <a class=" fw-semibold text-primary-emphasis link-underline link-underline-opacity-0" href="{% pageurl story %}">Read More</a>
+                                        </div>
+                                    </div>
+                            {% endwith %}
+                            </div>
+                        {% endfor %}
+            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

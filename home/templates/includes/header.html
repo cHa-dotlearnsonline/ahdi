@@ -1,0 +1,18 @@
+{% load navigation_tags static %}
+
+<div class="navbar navbar-expand-md fixed-top bg-dark bg-opacity-75 shadow">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img src="{% static 'image/AHDI-New-Logo.png' %}" alt="ahdi logo" style="height: 75px; width: 75px; object-fit: cover;"><span class="primary-color fw-bold" style="font-size: 10px; display:block;">Archie Hinchcliffe Disability Intervention</span></a>
+        
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon order-0"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                {% get_site_root as site_root %}
+                {% top_menu parent=site_root calling_page=self %}
+
+            </ul>
+        </div>       
+    </div>
+</div>
